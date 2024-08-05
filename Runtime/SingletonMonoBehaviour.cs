@@ -1,51 +1,63 @@
 ﻿using UnityEngine;
 using System;
 
-public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour{
-
-    [SerializeField]
-    bool _DontDestroyGameobjectOnLoad = false;
-
-    private static T instance;
-    public static T Instance
+namespace Sainna.Utils
+{
+    public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
-        get{
-            if (instance == null) {
-                Type t = typeof(T);
 
-                instance = (T)FindObjectOfType (t);
-                if (instance == null) {
-                    Debug.LogError (t + " をアタッチしているGameObjectはありません");
+        [SerializeField] bool _DontDestroyGameobjectOnLoad = false;
+
+        private static T instance;
+
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    Type t = typeof(T);
+
+                    instance = (T)FindObjectOfType(t);
+                    if (instance == null)
+                    {
+                        Debug.LogError($"{t} is not attached to any GameObjects");
+                    }
                 }
+
+                return instance;
+            }
+        }
+
+        virtual protected void Awake()
+        {
+            CheckInstance();
+        }
+
+        protected bool CheckInstance()
+        {
+            if (instance == null)
+            {
+                instance = this as T;
+                if (_DontDestroyGameobjectOnLoad)
+                    DontDestroyOnLoad(gameObject);
+                return true;
+            }
+            else if (Instance == this)
+            {
+                return true;
             }
 
-            return instance;
-        }
-    }
+            if (_DontDestroyGameobjectOnLoad)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(this);
+            }
 
-    virtual protected void Awake(){
-        // 他のゲームオブジェクトにアタッチされているか調べる
-        // アタッチされている場合は破棄する。
-        CheckInstance();
-    }
-
-    protected bool CheckInstance(){
-        if (instance == null) {
-            instance = this as T;
-            if(_DontDestroyGameobjectOnLoad)
-                DontDestroyOnLoad(gameObject);
-            return true;
-        } else if (Instance == this) {
-            return true;
+            return false;
         }
-        if(_DontDestroyGameobjectOnLoad)
-        {
-            Destroy (gameObject);
-        }
-        else
-        {
-            Destroy (this);   
-        }
-        return false;
     }
 }

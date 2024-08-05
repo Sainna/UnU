@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IsColliderTriggered : MonoBehaviour
+namespace Sainna.Utils
 {
-    public bool IsTriggered {get; private set;} = false;
-
-    [SerializeField]
-    string _TagLimit = null;
-
-
-    void OnTriggerEnter(Collider other)
+    public class IsColliderTriggered : MonoBehaviour
     {
-        if(string.IsNullOrEmpty(_TagLimit) || _TagLimit == other.tag)
-            IsTriggered = true;
-    }
+        public bool IsTriggered { get; private set; } = false;
+
+        [SerializeField] string _TagLimit = null;
 
 
-    void OnTriggerExit(Collider other)
-    {
-        if(string.IsNullOrEmpty(_TagLimit) || _TagLimit == other.tag)
-            IsTriggered = false;
+        void OnTriggerEnter(Collider other)
+        {
+            if (string.IsNullOrEmpty(_TagLimit) || _TagLimit == other.tag)
+                IsTriggered = true;
+        }
+
+
+        void OnTriggerExit(Collider other)
+        {
+            if (string.IsNullOrEmpty(_TagLimit) || _TagLimit == other.tag)
+                IsTriggered = false;
+        }
     }
 }

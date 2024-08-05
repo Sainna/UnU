@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class EnumFlagsAttribute : PropertyAttribute
+namespace Sainna.Utils
 {
-    public EnumFlagsAttribute() { }
+    public class EnumFlagsAttribute : PropertyAttribute
+    {
+        public EnumFlagsAttribute()
+        {
+        }
+    }
 }
- 

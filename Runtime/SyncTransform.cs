@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SyncTransform : MonoBehaviour
+namespace Sainna.Utils
 {
-    [SerializeField]
-    Transform SyncPoint = null;
-
-    [SerializeField]
-    bool _SyncY = false;
-
-    // Update is called once per frame
-    void Update()
+    public class SyncTransform : MonoBehaviour
     {
-        Vector3 lol = SyncPoint.position;
-        Quaternion rot = SyncPoint.rotation;
+        [SerializeField] Transform SyncPoint = null;
 
-        rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
-        if(!_SyncY)
+        [SerializeField] bool _SyncY = false;
+
+        // Update is called once per frame
+        void Update()
         {
-            lol.y = transform.position.y;
-        }
+            Vector3 lol = SyncPoint.position;
+            Quaternion rot = SyncPoint.rotation;
 
-        transform.rotation = rot;
-        transform.position = lol;
+            rot.eulerAngles = new Vector3(0, rot.eulerAngles.y, 0);
+            if (!_SyncY)
+            {
+                lol.y = transform.position.y;
+            }
+
+            transform.rotation = rot;
+            transform.position = lol;
+        }
     }
 }

@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IgnoreCollision : MonoBehaviour
-{
-    [SerializeField]
-    Collider _ThisCollider = null;
 
-    [SerializeField, Tooltip("Collider to ignore")]
-    Collider[] _ToIgnore = null;
-    void Start()
+namespace Sainna.Utils
+{
+    public class IgnoreCollision : MonoBehaviour
     {
-        foreach(var col in _ToIgnore)
+        [SerializeField] Collider _ThisCollider = null;
+
+        [SerializeField, Tooltip("Collider to ignore")]
+        Collider[] _ToIgnore = null;
+
+        void Start()
         {
-            Physics.IgnoreCollision(_ThisCollider, col, true);
+            foreach (var col in _ToIgnore)
+            {
+                Physics.IgnoreCollision(_ThisCollider, col, true);
+            }
         }
     }
 }

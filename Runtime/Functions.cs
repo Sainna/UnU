@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sainna
+namespace Sainna.Utils
 {
-    public static class Utils
+    public static class Functions
     {
         public static Vector3 GetRandomPointInsideCollider( BoxCollider boxCollider)
         {
@@ -17,5 +17,4 @@ namespace Sainna
             return boxCollider.transform.TransformPoint( point );
         }
     }
-
 }

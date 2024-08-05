@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class CollisionBlock : MonoBehaviour
+namespace Sainna.Utils
 {
-
-    void OnCollisionStay(Collision col)
+    [RequireComponent(typeof(Collider))]
+    public class CollisionBlock : MonoBehaviour
     {
-        if(col.rigidbody)
-        {
-            col.rigidbody.velocity /= 2;
-            col.rigidbody.angularVelocity /= 2;
-            col.rigidbody.useGravity = false;
-        }
-    }
 
-    void OnCollisionExit(Collision col)
-    {
-        if(col.rigidbody)
+        void OnCollisionStay(Collision col)
         {
-            col.rigidbody.useGravity = true;
+            if (col.rigidbody)
+            {
+                col.rigidbody.velocity /= 2;
+                col.rigidbody.angularVelocity /= 2;
+                col.rigidbody.useGravity = false;
+            }
         }
-    }
 
-    
+        void OnCollisionExit(Collision col)
+        {
+            if (col.rigidbody)
+            {
+                col.rigidbody.useGravity = true;
+            }
+        }
+
+
+    }
 }

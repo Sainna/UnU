@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// FOR DEBUG USE ONLY
-public class EventOnKeyPress : MonoBehaviour
+namespace Sainna.Utils
 {
-    [SerializeField]
-    KeyCode[] _Keys = null;
-
-    [SerializeField]
-    UnityEvent[] _Events = null;
-
-
-    #if UNITY_EDITOR
-    // Update is called once per frame
-    void Update()
+// FOR DEBUG USE ONLY
+    public class EventOnKeyPress : MonoBehaviour
     {
-        for (int i = 0; i < _Keys.Length; i++)
+        [SerializeField] KeyCode[] _Keys = null;
+
+        [SerializeField] UnityEvent[] _Events = null;
+
+
+#if UNITY_EDITOR
+        // Update is called once per frame
+        void Update()
         {
-            if(Input.GetKeyDown(_Keys[i]))
+            for (int i = 0; i < _Keys.Length; i++)
             {
-                _Events[i].Invoke();
+                if (Input.GetKeyDown(_Keys[i]))
+                {
+                    _Events[i].Invoke();
+                }
             }
         }
+#endif
     }
-    #endif
 }

@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReportPosition : MonoBehaviour
+namespace Sainna.Utils
 {
-    new Transform transform;
-    // Start is called before the first frame update
-    void Start()
+    public class ReportPosition : MonoBehaviour
     {
-        transform = GetComponent<Transform>();
-    }
+        new Transform transform;
+        // Start is called before the first frame update
+        void Start()
+        {
+            transform = GetComponent<Transform>();
+        }
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        Debug.LogWarning($"{name} - {transform.position}");
+        // Update is called once per frame
+        void LateUpdate()
+        {
+            Debug.LogWarning($"{name} - {transform.position}");
+        }
     }
 }
+

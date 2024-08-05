@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class StandardMaterialRandomColor : MonoBehaviour
+namespace Sainna.Utils
 {
-    bool IsSRP()
+    public class StandardMaterialRandomColor : MonoBehaviour
     {
-        return GraphicsSettings.defaultRenderPipeline != null;
-    }
- 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        var mr = GetComponent<MeshRenderer>();
-        if (IsSRP())
+        bool IsSRP()
         {
-            //srp
-            mr?.material.SetColor("_BaseColor", Random.ColorHSV());
+            return GraphicsSettings.defaultRenderPipeline != null;
         }
-        else 
+     
+
+        // Start is called before the first frame update
+        void Start()
         {
-            //standard
-            mr.material.color = Random.ColorHSV();
+            var mr = GetComponent<MeshRenderer>();
+            if (IsSRP())
+            {
+                //srp
+                mr?.material.SetColor("_BaseColor", Random.ColorHSV());
+            }
+            else 
+            {
+                //standard
+                mr.material.color = Random.ColorHSV();
+            }
         }
     }
 }
